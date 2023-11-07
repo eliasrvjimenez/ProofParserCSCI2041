@@ -1,2 +1,7 @@
+(menhir (modules parser))
+
+
+(ocamllex lexer)
+
 (library
  (name final_project))

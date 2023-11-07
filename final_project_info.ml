@@ -41,7 +41,7 @@ let (*prove*) append_nilnil
    Proof of append_nilnil:
     append Nil Nil
    = {definition of append}
-    match Nil with | Nil -> Nil | Cons ((h : int), (t : list)) -> Cons (h, append t Nil)
+    match Nil with | Nil -> Nil | Cons ((h : int), (t : list)) -> Cons (h, append t Nil sdasd)
    = {matching Nil with Nil}
     Nil
 *)
