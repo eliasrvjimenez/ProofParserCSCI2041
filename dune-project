@@ -5,11 +5,9 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github eliasrvjimenez/ProofParserCSCI2041))
 
-(authors "Author Name")
-
-(maintainers "Maintainer Name")
+(authors "Elias Vera-Jimenez", "Dylan Ringer")
 
 (license LICENSE)
 

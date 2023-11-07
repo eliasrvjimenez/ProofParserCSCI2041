@@ -1,5 +1,5 @@
-(* A sample file for your ocaml prover.
 
+(* A sample file for your ocaml prover.
    The syntax here is chosen so that these files can be parsed by the ocaml compiler.
    This allows you to, when you write files for your prover,
      check the types of your definitions and lemmas, and even test them.
