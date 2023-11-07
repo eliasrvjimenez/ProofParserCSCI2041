@@ -2,4 +2,4 @@
 
 ### Created by Elias Vera-Jimenez & Dylan Ringer ###
 
-TODO
+Connected
