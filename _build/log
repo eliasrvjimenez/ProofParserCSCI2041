@@ -1,0 +1,6 @@
+# dune init proj final_project
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Workspace root:
+# /Users/meat5auce/ProgramFiles/OCaml/CSCI2041/final-project-2041/final_project
+# Auto-detected concurrency: 8
