@@ -11,6 +11,8 @@ rule token = parse
 | ['a'-'z' 'A'-'Z' '0'-'9' '_' '\'']+ as word { IDENT(word) } 
 | '(' {LPAREN}
 | ')' {RPAREN}
+| '*' {STAR}
+| '=' {EQUALS}
 | _ { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf))}
 | eof { EOF }
 

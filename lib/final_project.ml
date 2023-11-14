@@ -9,5 +9,8 @@ let rec string_of_expression (e:expression) =
   | Application (e1,e2) ->  
     "(" ^ (string_of_expression e1) ^ 
     " " ^ (string_of_expression e2) ^ ")"
+
+let rec string_of_equation (e: equation) = 
+  "( TODO )"
   
 
