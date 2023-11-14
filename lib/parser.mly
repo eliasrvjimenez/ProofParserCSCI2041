@@ -1,20 +1,19 @@
 %{
     open Ast
 %}
-%token EOF
-%token <declaration> IDENT
-%token COLON
+%token <string> IDENT
 %token LPAREN
 %token RPAREN
+%token EOF
 
-%start <Ast.declaration> prog
+%start <expression list> main
 
 %%
 
-prog:
-    | d = declaration; EOF { d }
-    ;
-
-declaration:
-    | i = IDENT { i } (* TODO *)
+main:
+    | e = expression EOF { [e] }
+expression:
+    | LPAREN; e = expression ; RPAREN { e }
+    | i = IDENT { Identifier i } (* TODO *)
+    | e1 = expression; e2 = expression { Application (e1,e2) }
     ;

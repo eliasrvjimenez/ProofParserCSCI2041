@@ -2,15 +2,15 @@
    I've called it procaml.ml there, some will probably have called it halloween.ml.
    Names may vary, but these are the things this executable needs.
    In any case, these four definitions should be the only things you need to change. *)
-let string_of_declaration = Procaml.string_of_declaration
-let mainParser = Procaml.Parser.main
-let mainLexer = Procaml.Lexer.token
-module Parser : (sig exception Error end) = Procaml.Parser
+let string_of_declaration = Final_project.string_of_expression
+let mainParser = Final_project.Parser.main
+let mainLexer = Final_project.Lexer.token
+module Parser : (sig exception Error end) = Final_project.Parser
 (* Here are the types these things have for me,
    but I'm not stating them for ocaml because there's a good chance things are different for you:
-   Parser.main : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> Procaml.declaration list
-   Lexer.token : Lexing.lexbuf -> Procaml.Parser.token
-   string_of_declaration : Procaml.declaration -> string
+   Parser.main : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> Final_project.declaration list
+   Lexer.token : Lexing.lexbuf -> Final_project.Parser.token
+   string_of_declaration : Final_project.declaration -> string
 *)
 
 (* the function that prints everything. *)

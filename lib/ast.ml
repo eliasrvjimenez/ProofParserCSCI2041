@@ -1,9 +1,6 @@
-type declaration =
-  | Constructor of declaration
-  | Identity of string 
-  | LeftParen
-  | RightParen
-  | Colon
+type expression =
+  | Identifier of string
+  | Application of expression * expression
 
 type pattern = 
   | Constructor
