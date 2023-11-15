@@ -7,11 +7,12 @@
 %token STAR
 %token EOF
 %token EQUALS
+%token <string> AXIOM
+%token <string> LET
 
 %start main
 %type <expression list> main
 %type <expression> expression
-%type <equality> equality
 
 %%
 
@@ -20,8 +21,6 @@ main:
 expression:
     | LPAREN; e = expression ; RPAREN { e }
     | i = IDENT { Identifier i } (* TODO *)
-    | e1 = expression; e2 = expression { Application (e1, Tuple [e2]) }
-equality:
-    | eq1 = expression; EQUALS; eq2 = expression { Equality (eq1, eq2)}
+    | e1 = expression; e2 = expression { Application (e1, e2) } 
 
 %%

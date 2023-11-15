@@ -1,15 +1,13 @@
 type expression =
   | Identifier of string
   | Application of expression * expression
-  | Tuple of (expression list)
 
-type equality  = 
-  Equality of expression * expression
+type equality =
+  | Equality of expression * expression
 
-type comment = 
-  Comment of string
+type declArgs = (string * string) list 
 
-type hint =
-  Hint of string option
+type declaration = 
+  | Prove of (string * declArgs * equality)
 
 
