@@ -1,7 +1,15 @@
 type expression =
   | Identifier of string
   | Application of expression * expression
-  | Comment of expression
-  | Equation of expression * expression
+  | Tuple of (expression list)
 
-type equality = 
+type equality  = 
+  Equality of expression * expression
+
+type comment = 
+  Comment of string
+
+type hint =
+  Hint of string option
+
+
