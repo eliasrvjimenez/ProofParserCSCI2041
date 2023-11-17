@@ -1,13 +1,17 @@
 type expression =
   | Identifier of string
   | Application of expression * expression
+  | Proof of string option
+  | Axiom of string option 
 
 type equality =
   | Equality of expression * expression
+  | Is of equality
 
 type declArgs = (string * string) list 
 
 type declaration = 
-  | Prove of (string * declArgs * equality)
+  | Prove of (expression * string * declArgs * equality)
+
 
 

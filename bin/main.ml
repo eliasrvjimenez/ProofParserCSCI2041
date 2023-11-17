@@ -1,8 +1,9 @@
+
 (* These are the functions and modules I get from the module in the lib directory.
    I've called it procaml.ml there, some will probably have called it halloween.ml.
    Names may vary, but these are the things this executable needs.
    In any case, these four definitions should be the only things you need to change. *)
-let string_of_expression = Final_project.string_of_expression
+let string_of_declaration = Final_project.string_of_declaration
 let mainParser = Final_project.Parser.main
 let mainLexer = Final_project.Lexer.token
 module Parser : (sig exception Error end) = Final_project.Parser
@@ -10,12 +11,12 @@ module Parser : (sig exception Error end) = Final_project.Parser
    but I'm not stating them for ocaml because there's a good chance things are different for you:
    Parser.main : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> Final_project.expression list
    Lexer.token : Lexing.lexbuf -> Final_project.Parser.token
-   string_of_expression : Final_project.expression -> string
+   string_of_declaration : Final_project.expression -> string
 *)
 
 (* the function that prints everything. *)
 (* has a side-effect (namely: it prints) so it belongs here *)
-let print_all = Stdlib.List.map (fun decl -> print_endline (string_of_expression decl))
+let print_all = Stdlib.List.map (fun decl -> print_endline (string_of_declaration decl))
 
 (* An improved function to parse everything from a 'channel'.
  * It has a side-effect (namely: reads from an input-channel)
