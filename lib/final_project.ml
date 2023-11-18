@@ -11,14 +11,8 @@ let rec string_of_expression (e:expression) =
   match e with 
   | Identifier i -> i
   | Application (e1,e2) ->  
-    "(" ^ (string_of_expression e1) ^ 
-    " " ^ (string_of_expression e2) ^ ") \n"
-  | Proof p -> match p with
-                | None -> ""
-                | Some p -> p
-  | Axiom a -> match a with 
-                | None -> ""
-                | Some a -> a
+    (string_of_expression e1) ^ 
+    " " ^ (string_of_expression e2) ^ " \n"
                   
 let rec string_of_args (a: declArgs) = 
     match a with
@@ -32,6 +26,10 @@ let rec string_of_equality (eq:equality) =
 
 let string_of_declaration (d:declaration) = 
   match d with 
-  | Prove (p,i,a,eq) -> "Let " ^ (string_of_expression p) ^ (string_of_expression i) ^ " " 
-  ^ (string_of_args a) ^ (string_of_equality eq)
+  | Prove (None, i,a,eq, None) -> "Let " ^ (string_of_expression i) ^ " " 
+      ^ (string_of_args a) ^ (string_of_equality eq)
+  | Prove (Some p, i,a,eq, None) -> "Let " ^ p ^ " " ^ (string_of_expression i) ^ " " 
+      ^ (string_of_args a) ^ (string_of_equality eq)
+  | Prove (Some p, i, a, eq, Some ax) -> "Let " ^ p ^ " " ^ (string_of_expression i) ^ " " ^ (string_of_args a) ^ (string_of_equality eq) ^ "\n" ^ ax
+  | Prove (None, i, a, eq, Some ax) -> "Let " ^ (string_of_expression i) ^ " " ^ (string_of_args a) ^ (string_of_equality eq) ^ ax
   

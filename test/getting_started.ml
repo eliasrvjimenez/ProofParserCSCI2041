@@ -1,12 +1,7 @@
-(* A minimal sample file for your ocaml prover.
-   This file does not contain everything your prover needs to do, just a small selection:
-   - all functions and lemmas have only a single argument
-   - the only statement is a let-prove statement
-   - the only hint is 'axiom' (no 'induction')
-*)
+(* A minimal sample file for your ocaml prover. This file does not contain everything your prover needs to do, just a small selection: - all functions and lemmas have only a single argument   - the only statement is a let-prove statement   - the only hint is 'axiom' (no 'induction') *)
 
 let (*prove*) cf_idempotent (h : int)
- = (cf (cf h) = cf h)
+ = (cf (cf h) =  cf h)
 (*hint: axiom *)
 
 let (*prove*) inv_involution (h : int)
@@ -34,3 +29,4 @@ let (*prove*) cf_inv_property (h : int)
   = {lemma inv_involution}
    cf h
 *)
+

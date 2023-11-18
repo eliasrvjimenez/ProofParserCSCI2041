@@ -12,14 +12,19 @@ rule token = parse
     { match word with
     | "let" -> LET(word)
     | _ ->  IDENT(word) }  
-| "(*hint: axiom *)" {AXIOM}
-| "(*prove*)" {PROVE}
+| "(*prove*)" as proof{PROVE(proof)} 
+| "(*hint: axiom *)" as axiom {AXIOM(axiom)}
+| "(*" { comment lexbuf }
 | ':' {COLON}
 | '(' {LPAREN}
 | ')' {RPAREN}
-| '*' {STAR}
 | '=' {EQUALS}
 | _ { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf))}
 | eof { EOF }
+
+and comment = parse
+| "*)" {token lexbuf}
+| eof {raise (SyntaxError ("Unterminated Comment, please add a *)")) }
+| _ {comment lexbuf}
 
 
