@@ -9,7 +9,7 @@ type equality =
 type declArgs = (string * string) list 
 
 type declaration = 
-  | Prove of (string option * expression * declArgs * equality * string option)
+  | Prove of (string option * string option * expression * declArgs * equality * string option)
 
 
 

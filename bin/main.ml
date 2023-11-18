@@ -40,8 +40,8 @@ let print_all = Stdlib.List.map (fun decl -> print_endline (string_of_declaratio
  * but it count newlines as characters all of a sudden.
  * This means things behave as if the entire file is a single line.
  * If that's how you've written your lexer, and you can't be bothered
- * to change your lexer, the work-around is to remove all newlines
- * from the input file to get an error location.
+ * to change your lexer,the work-around is to remove all newlines
+ * from the input file t o get an error location.
  *)
 let printback_file (filename : string) (chan : in_channel)
  = let buf = Lexing.from_channel ~with_positions:true chan in
