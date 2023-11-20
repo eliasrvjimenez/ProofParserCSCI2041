@@ -38,12 +38,12 @@ let rec string_of_equality (eq:equality) =
 
 let string_of_declaration (d:declaration) = 
   match d with 
-  | Prove (None, None, i,a,eq, h) -> "let " ^ (string_of_expression i) ^ " " 
+  | Prove (None, None, i,a,eq, h) -> "let " ^ i ^ " " 
       ^ (string_of_args a) ^ (string_of_equality eq) ^ "\n" ^(string_of_hint h) (* Regular Declaration *)
-  | Prove (Some p, None, i,a,eq, h) -> "let " ^ p ^ " " ^ (string_of_expression i) ^ " " 
+  | Prove (Some p, None, i,a,eq, h) -> "let " ^ p ^ " " ^ i ^ " " 
       ^ (string_of_args a) ^ (string_of_equality eq) ^ "\n" ^(string_of_hint h) (*Declaration with (*prove*)*)
-  | Prove (None, Some r, i,a,eq, h) -> "let " ^ r ^ (string_of_expression i) ^ " " 
+  | Prove (None, Some r, i,a,eq, h) -> "let " ^ r ^ i ^ " " 
       ^ (string_of_args a) ^ (string_of_equality eq) ^ "\n" ^ (string_of_hint h)  (*Recursive Declaration*)
-  | Prove (Some p, Some r, i,a,eq, h) -> "let " ^ r ^ p ^ " " ^ "\n" ^(string_of_expression i) ^ " " 
+  | Prove (Some p, Some r, i,a,eq, h) -> "let " ^ r ^ p ^ " " ^ "\n" ^ i ^ " " 
       ^ (string_of_args a) ^ (string_of_equality eq) ^ "\n" ^(string_of_hint h)(*Recursive Declaration with (*prove*)*)
   | Type (i, a) -> "type " ^ i ^ " = " ^  "\n" ^ (string_of_args a)

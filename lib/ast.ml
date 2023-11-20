@@ -14,7 +14,7 @@ type declArgs =
 type hint = string option
 
 type declaration = 
-  | Prove of (string option * string option * expression * declArgs * equality * hint) (* let rec ... = *)
+  | Prove of (string option * string option * string * declArgs * equality * hint) (* let rec ... = *)
   | Type of (string * declArgs) (* type ... = *)
 
 
