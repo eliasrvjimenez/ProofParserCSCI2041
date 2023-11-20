@@ -1,5 +1,0 @@
-(* cf x y z *)
-cf x z
-cf x y y z
-cf x (y y y)
-cf x x x
