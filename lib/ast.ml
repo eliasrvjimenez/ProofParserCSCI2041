@@ -7,9 +7,11 @@ type equality =
   | Is of equality
 
 type declArgs =
-  | Variables of (string * string) list (* for declarations of type Prove *) 
-  (* | Variant of string *)
-  | VariantOf of (string * string) list (* for declarations of type Type *)
+  (* In Declarations *)
+  | Variables of (string * string) list 
+  (* In Types *)
+  | Variants of string list (* list that contains these. *)
+  | VariantsOf of (string * string) list 
 
 type hint = string option
 

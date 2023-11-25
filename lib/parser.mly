@@ -41,8 +41,9 @@ declaration:
     | LET; r = REC; p = PROVE; i = IDENT; a= declArgs; eq = equality; h = hint { Prove (Some p, Some r, i, a, eq, h)} // Recursive Declaration with both (*prove*) and (*hint: axiom*)
     | TYPE; i = IDENT; EQUALS; a = declArgs; { Type (i, a)}
 declArgs:
-    | LPAREN; a1 = IDENT; COLON; a2 = IDENT; RPAREN { Variables [(a1,a2)] }
-    | VERT;  a1 = IDENT; OF; a2 = IDENT { VariantOf [(a1, a2)] }
+    | a = list(LPAREN; a1 = IDENT; COLON; a2 = IDENT; RPAREN { (a1, a2) }) { Variables a }
+    | v = list(VERT; e = IDENT { e }) { Variants v }
+    | v = list(VERT; e1 = IDENT; OF; e2 = IDENT { (e1,e2) }) { VariantsOf v }
 expression:
     | LPAREN; e = expression ; RPAREN { e }
     | i = IDENT { Identifier i }

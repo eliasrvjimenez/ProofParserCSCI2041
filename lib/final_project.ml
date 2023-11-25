@@ -17,13 +17,14 @@ let rec string_of_expression (e:expression) =
 
 
 let string_of_args (a: declArgs) = 
-  let rec apply_args (lst:(string * string) list) (char1: string) (char2:string) (char3:string) = 
+  let rec apply_args (lst: 'a list) (char1: string) (char2:string) (char3:string) = 
     match lst with 
     | [] -> ""
     | (v1, v2) :: vtl -> char1 ^ v1 ^ char2 ^ v2 ^ char3 ^ (apply_args vtl char1 char2 char3) in
   match a with
   | Variables v -> apply_args v "(" " : " ")"
-  | VariantOf v -> apply_args v "\n|" " of " ""
+  | VariantsOf v -> apply_args v "\n|" " of " ""
+  | Variants v -> apply_args v "\n|" "" ""
 
 
 let rec string_of_equality (eq:equality) =
