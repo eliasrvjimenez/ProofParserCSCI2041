@@ -24,6 +24,7 @@ rule token = parse
 | '=' {EQUALS}
 | '|' {VERT}
 |"(*" { comment 1 lexbuf }
+| "*" {STAR}
 | newline { Lexing.new_line lexbuf; token lexbuf}
 | _ { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf))}
 | eof { EOF }

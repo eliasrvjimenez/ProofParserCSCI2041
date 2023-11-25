@@ -8,6 +8,7 @@
 %token EQUALS
 %token COLON
 %token VERT
+%token STAR
 %token <string> TYPE
 %token <string> OF
 %token <string> PROVE
@@ -42,12 +43,15 @@ declaration:
     | TYPE; i = IDENT; EQUALS; a = list(declArgs); { Type (i, a)}
 declArgs:
     | LPAREN; v1 = IDENT; COLON; v2 = IDENT; RPAREN  { Variable (v1,v2) }
-    | VERT; v = IDENT  { Variant v }
-    | VERT; v1 = IDENT; OF; v2 = IDENT { VariantOf (v1,v2) }
+    | v = expression  { Variant v }
+    | VERT; v = expression  { Variant v }
+    | VERT; v1 = expression; OF; LPAREN; v2 = expression; RPAREN { VariantOf (v1,v2) }
+    | VERT; v1 = expression; OF; v2 = expression { VariantOf (v1, v2) }
 expression:
     | LPAREN; e = expression ; RPAREN { e }
     | i = IDENT { Identifier i }
     | e1 = expression; e2 = expression { Application (e1, e2) }
+    | e1 = expression; STAR;  e2 = expression { Tuple (e1, e2) }
 equality:
     | EQUALS; e=equality { Is e }
     | e1 = expression; EQUALS; e2=expression { Equality (e1, e2) }

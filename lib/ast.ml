@@ -1,6 +1,7 @@
 type expression =
   | Identifier of string
   | Application of expression * expression
+  | Tuple of expression * expression
 
 type equality =
   | Equality of expression * expression
@@ -10,8 +11,8 @@ type declArgs =
   (* In Declarations *)
   | Variable of string * string
   (* In Types *)
-  | Variant of string(* list that contains these. *)
-  | VariantOf of string * string 
+  | Variant of expression (* list that contains these. *)
+  | VariantOf of expression * expression
 
 type hint = string option
 

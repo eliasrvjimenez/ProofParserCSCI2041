@@ -13,6 +13,7 @@ let rec string_of_expression (e:expression) =
   | Application (e1,e2) ->  "(" ^ 
     (string_of_expression e1) ^ 
     " " ^ (string_of_expression e2) ^ ")"
+  | Tuple (e1, e2) -> "(" ^ (string_of_expression e1) ^ " * " ^ (string_of_expression e2) ^ ")"
 
 
 
@@ -21,8 +22,8 @@ let rec string_of_args (a: declArgs list) =
   | [] -> ""
   | ah :: atl -> (match ah with
                   | Variable (v1,v2) -> "(" ^ v1 ^ " : " ^ v2 ^ ")"
-                  | VariantOf (v1,v2) -> "\n|" ^ v1 ^ " of " ^ v2
-                  | Variant v -> "\n|" ^ v) ^ string_of_args atl
+                  | VariantOf (v1,v2) -> "| " ^ (string_of_expression v1) ^ " of (" ^ (string_of_expression v2) ^ ")\n"
+                  | Variant v -> "| " ^ (string_of_expression v) ^ "\n" ) ^ string_of_args atl
 
 
 let rec string_of_equality (eq:equality) =
