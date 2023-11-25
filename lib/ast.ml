@@ -8,16 +8,16 @@ type equality =
 
 type declArgs =
   (* In Declarations *)
-  | Variables of (string * string) list 
+  | Variable of string * string
   (* In Types *)
-  | Variants of string list (* list that contains these. *)
-  | VariantsOf of (string * string) list 
+  | Variant of string(* list that contains these. *)
+  | VariantOf of string * string 
 
 type hint = string option
 
 type declaration = 
-  | Prove of (string option * string option * string * declArgs * equality * hint) (* let rec ... = *)
-  | Type of (string * declArgs) (* type ... = *)
+  | Prove of (string option * string option * string * declArgs list * equality * hint) (* let rec ... = *)
+  | Type of (string * declArgs list) (* type ... = *)
 
 
 
