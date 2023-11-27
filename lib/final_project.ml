@@ -34,7 +34,7 @@ let rec string_of_equality (eq:equality) =
   let string_of_hint (h:hint) = 
     match h with 
     | None -> ""
-    | Some h -> h
+    | Some h -> h ^ "\n"
 
 let string_of_declaration (d:declaration) = 
   match d with 

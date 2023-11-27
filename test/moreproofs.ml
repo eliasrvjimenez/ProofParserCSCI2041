@@ -17,8 +17,8 @@ let (*prove*) append_cons (x:int) (xs:int) (ys:int) =
 
 (* a proof of associativity of append requires induction,
    but we can ask for the base case manually: *)
-(* let (*prove*) append_assoc_base (xs:int) (ys:int) =
-  (append (append Nil xs) ys = append Nil (append xs ys)) *)
+let (*prove*) append_assoc_base (xs:int) (ys:int) =
+  (append (append Nil xs) ys = append Nil (append xs ys))
 
 (* We can add the inductive hypothesis manually too.
    Note that 'tl' is never a variable,
