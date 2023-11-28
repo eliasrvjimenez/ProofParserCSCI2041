@@ -19,7 +19,9 @@
 %token <string> REC
 
 %start main
+%start main2
 %type <declaration list> main
+%type <expression> main2
 %type <expression> expression
 %type <equality> equality
 %type <declArgs> declArgs
@@ -30,6 +32,8 @@
 
 main:
     | d = list(declaration); EOF { d }
+main2:
+    | e = expression; EOF { e }
 declaration:
     // Prove of (string option * string option * expression * declArgs * equality * hint)
     | LET; i = IDENT; a = list(declArgs); eq=equality { Prove (None, None, i,a,eq, None) } // Basic Declaration
@@ -41,6 +45,7 @@ declaration:
     | LET; r = REC; p = PROVE; i = IDENT; a = list(declArgs); eq = equality; { Prove (Some p, Some r, i, a, eq, None) } // Recursive Declaration with (*hint: axiom *)
     | LET; r = REC; p = PROVE; i = IDENT; a= list(declArgs); eq = equality; h = hint { Prove (Some p, Some r, i, a, eq, h)} // Recursive Declaration with both (*prove*) and (*hint: axiom*)
     | TYPE; i = IDENT; EQUALS; a = list(declArgs); { Type (i, a)}
+    | e = expression; { Expression e }
 declArgs:
     | LPAREN; v1 = IDENT; COLON; v2 = IDENT; RPAREN  { Variable (v1,v2) }
     | v = expression  { Variant v }

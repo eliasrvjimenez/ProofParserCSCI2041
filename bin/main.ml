@@ -4,7 +4,7 @@
    Names may vary, but these are the things this executable needs.
    In any case, these four definitions should be the only things you need to change. *)
 let string_of_declaration = Final_project.string_of_declaration
-let string_of_simple_proof = Final_project.string_of_simple_proof
+let prover_main = Final_project.prover_main 
 let mainParser = Final_project.Parser.main
 let mainLexer = Final_project.Lexer.token
 module Parser : (sig exception Error end) = Final_project.Parser
@@ -18,7 +18,7 @@ module Parser : (sig exception Error end) = Final_project.Parser
 (* the function that prints everything. *)
 (* has a side-effect (namely: it prints) so it belongs here *)
 let print_all = Stdlib.List.map (fun decl -> print_endline (string_of_declaration decl))
-let simple_proof = Stdlib.List.map (fun simple -> print_endline (string_of_simple_proof simple))
+let simple_proof = prover_main 
 
 (* An improved function to parse everything from a 'channel'.
  * It has a side-effect (namely: reads from an input-channel)
