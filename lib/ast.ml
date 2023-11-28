@@ -1,11 +1,11 @@
 type expression =
   | Identifier of string
   | Application of expression * expression
+  | ApplicationWithParentheses of expression * expression
   | Tuple of expression * expression
 
 type equality =
   | Equality of expression * expression
-  | Is of equality
 
 type declArgs =
   (* In Declarations *)

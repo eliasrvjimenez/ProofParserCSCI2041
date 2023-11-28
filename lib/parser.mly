@@ -51,11 +51,13 @@ expression:
     | LPAREN; e = expression ; RPAREN { e }
     | i = IDENT { Identifier i }
     | e1 = expression; e2 = expression { Application (e1, e2) }
+    | LPAREN; e1 = expression; e2 = expression; RPAREN { ApplicationWithParentheses (e1,e2)}
     | e1 = expression; STAR;  e2 = expression { Tuple (e1, e2) }
 equality:
-    | EQUALS; e=equality { Is e }
+    | EQUALS; e1 = expression; EQUALS; e2=expression { Equality (e1, e2) }
     | e1 = expression; EQUALS; e2=expression { Equality (e1, e2) }
     | LPAREN; e1 = expression; EQUALS; e2=expression; RPAREN { Equality (e1,e2) }
+    | EQUALS; LPAREN; e1 = expression; EQUALS; e2=expression; RPAREN { Equality (e1,e2) }
 hint:
     | a = AXIOM { Some a }
     // | l = LEMMA { Some l }
