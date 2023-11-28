@@ -4,6 +4,7 @@
    Names may vary, but these are the things this executable needs.
    In any case, these four definitions should be the only things you need to change. *)
 let string_of_declaration = Final_project.string_of_declaration
+let string_of_simple_proof = Final_project.string_of_simple_proof
 let mainParser = Final_project.Parser.main
 let mainLexer = Final_project.Lexer.token
 module Parser : (sig exception Error end) = Final_project.Parser
@@ -17,6 +18,7 @@ module Parser : (sig exception Error end) = Final_project.Parser
 (* the function that prints everything. *)
 (* has a side-effect (namely: it prints) so it belongs here *)
 let print_all = Stdlib.List.map (fun decl -> print_endline (string_of_declaration decl))
+let simple_proof = Stdlib.List.map (fun simple -> print_endline (string_of_simple_proof simple))
 
 (* An improved function to parse everything from a 'channel'.
  * It has a side-effect (namely: reads from an input-channel)
@@ -57,6 +59,19 @@ let printback_file (filename : string) (chan : in_channel)
                     string_of_int (pos.pos_cnum - pos.pos_bol)^
                     ":\n  Syntax error")
 
+let simple_file (filename : string) (chan : in_channel)
+   = let buf = Lexing.from_channel ~with_positions:true chan in
+   (* Lexing.set_filename buf filename; If your ocaml is new enough, this line may help improve error messages. *)
+   match mainParser mainLexer buf with
+   | ast -> let _ = simple_proof ast in ()
+   | exception Parser.Error ->
+      let pos = buf.lex_start_p in
+      (* location is formatted such that it becomes clickable in vscode,
+         use ctrl-click or cmd-click *)
+      print_endline ("File \""^filename^"\", line "^
+                        string_of_int pos.pos_lnum^", character "^
+                        string_of_int (pos.pos_cnum - pos.pos_bol)^
+                        ":\n  Syntax error")
 (* This function is borrowed largely from Janestreet's core library *)
 (* It is used to ensure that files get closed after they are opened *)
 let protectx f x (finally : _ -> unit) =
@@ -78,6 +93,10 @@ let printfile (filename : string) : unit
  = protectx (printback_file filename)
             (Stdlib.open_in_gen [ Open_rdonly ] 0o000 filename)
             Stdlib.close_in
+let simple (filename: string) : unit
+ = protectx (simple_file filename)
+            (Stdlib.open_in_gen [ Open_rdonly ] 0o000 filename)
+            Stdlib.close_in
 
 (***********************************************************)
 (* here's the code for dealing with command line arguments *)
@@ -93,7 +112,8 @@ let usage_msg = Sys.executable_name ^ " [--printback <filename>]"
    Note that "Arg.String" takes a function of type: string -> unit.
    This is where we plug in the 'printfile' function we wrote above. *)
 let speclist =
-  [("--printback", Arg.String printfile, "Print the parsed file back out")]
+  [("--printback", Arg.String printfile, "Print the parsed file back out");
+  ("--simple", Arg.String simple, "Generates simple proof for file")]
 
 let _ = Arg.parse
            speclist
